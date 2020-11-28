@@ -6,27 +6,31 @@ ventana.setup(0.6,0.5)
 #print('ancho canv',ventana.canvwidth)
 anchoJuego= ventana.canvwidth-40
 #print('ancho:',anchoJuego)
-#ventana.bgcolor("black")
+ventana.bgcolor("green")
 ventana.title("Mi primer ejemplo con Turtle")
 ventana.tracer(1)
 
 #jugador1
 jugador1= turtle.Turtle()
-jugador1.color("blue")
+jugador1.color("white")
 jugador1.shape("square")
 jugador1.speed(0)
+jugador1.penup()
 jugador1.forward(-anchoJuego)
 jugador1.setheading(90)
 jugador1.shapesize(1,5)
 
+
 #jugador2
 jugador2= turtle.Turtle()
-jugador2.color("blue")
+jugador2.color("white")
 jugador2.shape("square")
 jugador2.speed(0)
+jugador2.penup()
 jugador2.forward(anchoJuego)
 jugador2.setheading(90)
 jugador2.shapesize(1,5)
+
 
 #funciones para el movimiento de los jugadores
 def player1sube():
@@ -59,24 +63,26 @@ pelota.color("red")
 pelota.shape("circle")
 pelota.shapesize(2)
 pelota.speed(0)
-pelota.dx = 1
-pelota.dy = 1
+pelota.penup()
+pelota.dx = 3
+pelota.dy = 3
 
 #linea divisora
 lin_div=turtle.Turtle()
-lin_div.color('black')
+lin_div.color('yellow')
 lin_div.shape('square')
 lin_div.speed(0)
 lin_div.shapesize(20,0.1)
 lin_div.forward(0)
 lin_div.left(0)
-
+lin_div.penup()
 #score
 score = turtle.Turtle()
+score.color('white')
 score.penup()
 score.hideturtle()
 score.goto(0,ventana.canvheight/2+10)
-score.write("jugardor1: 0   jugador2: 0 ", align="center", font=("courier",20,"bold"))
+score.write("Jugardor1: 0   Jugador2: 0 ", align="center", font=("courier",20,"bold"))
 score.jugador1=0
 score.jugador2=0
 
@@ -98,7 +104,10 @@ while not gameOver:
     pelota.sety(pelota.ycor() + pelota.dy)
 
     #rebote de la pelota
-    if pelota.ycor()-10 == ventana.canvheight/2 or pelota.ycor() +10 == -ventana.canvheight/2 :
+    #modifique en lugar de ==, puse > y <
+    #porque daba problemas al modificar la velocidad
+    #ya al igualarse a veces no se cumple, cuando cambiamos dx y dy
+    if pelota.ycor()-10 > ventana.canvheight/2 or pelota.ycor() +10 < -ventana.canvheight/2 :
         pelota.dy *=-1
         #winsound.Beep(1000, 50)
 
@@ -107,7 +116,7 @@ while not gameOver:
         pelota.goto(0,0)
         score.jugador2 +=1
         score.clear()
-        score.write(f"jugardor1: {score.jugador1}   jugador2: {score.jugador2} ",
+        score.write(f"Jugardor1: {score.jugador1}   Jugador2: {score.jugador2} ",
                     align="center", font=("courier", 20, "bold"))
 
     #cuando no alcanza a rebotar en el jugador2
@@ -115,7 +124,7 @@ while not gameOver:
         pelota.goto(0,0)
         score.jugador1 += 1
         score.clear()
-        score.write(f"jugardor1: {score.jugador1}   jugador2: {score.jugador2} ",
+        score.write(f"Jugardor1: {score.jugador1}   Jugador2: {score.jugador2} ",
                     align="center", font=("courier", 20, "bold"))
     #rebote en el jugador1
     if pelota.xcor() == -anchoJuego + 30:
