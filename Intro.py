@@ -64,8 +64,8 @@ pelota.shape("circle")
 pelota.shapesize(2)
 pelota.speed(0)
 pelota.penup()
-pelota.dx = 3
-pelota.dy = 3
+pelota.dx = 5
+pelota.dy = 5
 
 #linea divisora
 lin_div=turtle.Turtle()
@@ -115,6 +115,7 @@ while not gameOver:
     # cuando no alcanza a rebotar en el jugador1
     if pelota.xcor() < -anchoJuego-30 :
         pelota.goto(0,0)
+        pelota.dy *= -1
         score.jugador2 +=1
         score.clear()
         score.write(f"Jugardor1: {score.jugador1}   Jugador2: {score.jugador2} ",
@@ -123,6 +124,7 @@ while not gameOver:
     #cuando no alcanza a rebotar en el jugador2
     if pelota.xcor() > anchoJuego+30:
         pelota.goto(0,0)
+        pelota.dy *=-1
         score.jugador1 += 1
         score.clear()
         score.write(f"Jugardor1: {score.jugador1}   Jugador2: {score.jugador2} ",
