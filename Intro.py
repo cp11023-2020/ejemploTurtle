@@ -76,6 +76,7 @@ lin_div.shapesize(20,0.1)
 lin_div.forward(0)
 lin_div.left(0)
 lin_div.penup()
+
 #score
 score = turtle.Turtle()
 score.color('white')
@@ -126,13 +127,16 @@ while not gameOver:
         score.clear()
         score.write(f"Jugardor1: {score.jugador1}   Jugador2: {score.jugador2} ",
                     align="center", font=("courier", 20, "bold"))
+
     #rebote en el jugador1
-    if pelota.xcor() == -anchoJuego + 30:
+    #modifique en lugar de ==, puse <
+    if pelota.xcor() < -anchoJuego + 30:
         if jugador1.ycor() - 100 <= pelota.ycor() <= jugador1.ycor() + 100:
             pelota.dx *= -1
 
     #rebote en el jugador2
-    if pelota.xcor() ==  anchoJuego - 30:
+    #modifique en lugar de ==, puse >
+    if pelota.xcor() > anchoJuego - 30:
         if jugador2.ycor()-100 <= pelota.ycor() <= jugador2.ycor()+100:
             pelota.dx *=-1
 
