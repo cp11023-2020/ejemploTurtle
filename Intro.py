@@ -2,8 +2,9 @@ import turtle
 import winsound
 ventana = turtle.Screen()
 ventana.setup(0.6,0.4)
+print('ancho canv',ventana.canvwidth)
 anchoJuego= ventana.canvwidth-40
-
+print('ancho:',anchoJuego)
 #ventana.bgcolor("black")
 ventana.title("Mi primer ejemplo con Turtle")
 ventana.tracer(1)
@@ -74,14 +75,26 @@ print(ventana.screensize())
 gameOver = False
 while not gameOver:
     ventana.listen()
+
+    #movimiento de la pelota
+    pelota.setx(pelota.xcor() + pelota.dx)
+    pelota.sety(pelota.ycor() + pelota.dy)
+
+    #rebote de la pelota
     if pelota.ycor()-10 == ventana.canvheight/2 or pelota.ycor() -10 == -ventana.canvheight/2 :
         pelota.dy *=-1
         #winsound.Beep(1000, 50)
-    if pelota.xcor() ==  anchoJuego-30:
+
+    #rebote en el jugador1
+    if pelota.xcor() == -anchoJuego + 30:
+        if jugador1.ycor() - 100 <= pelota.ycor() <= jugador1.ycor() + 100:
+            pelota.dx *= -1
+
+    #rebote en el jugador2
+    if pelota.xcor() ==  anchoJuego - 30:
         if jugador2.ycor()-100 <= pelota.ycor() <= jugador2.ycor()+100:
             pelota.dx *=-1
-    pelota.setx(pelota.xcor()+pelota.dx)
-    pelota.sety(pelota.ycor()+pelota.dy)
+
 
 ventana.exitonclick()
 
