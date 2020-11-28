@@ -1,8 +1,8 @@
 import turtle
 import winsound
 ventana = turtle.Screen()
-#ventana.setup(0.6,0.4)
-ventana.setup(800,400)
+ventana.setup(0.6,0.5)
+#ventana.setup(800,400)
 #print('ancho canv',ventana.canvwidth)
 anchoJuego= ventana.canvwidth-40
 #print('ancho:',anchoJuego)
@@ -62,12 +62,21 @@ pelota.speed(0)
 pelota.dx = 1
 pelota.dy = 1
 
+#linea divisora
+lin_div=turtle.Turtle()
+lin_div.color('black')
+lin_div.shape('square')
+lin_div.speed(0)
+lin_div.shapesize(20,0.1)
+lin_div.forward(0)
+lin_div.left(0)
+
 #score
 score = turtle.Turtle()
 score.penup()
 score.hideturtle()
 score.goto(0,ventana.canvheight/2+10)
-score.write("jugardor 1: 0   jugador 2: 0 ", align="center", font=("courier",20,"bold"))
+score.write("jugardor1: 0   jugador2: 0 ", align="center", font=("courier",20,"bold"))
 score.jugador1=0
 score.jugador2=0
 
@@ -89,7 +98,7 @@ while not gameOver:
     pelota.sety(pelota.ycor() + pelota.dy)
 
     #rebote de la pelota
-    if pelota.ycor()-10 == ventana.canvheight/2 or pelota.ycor() -10 == -ventana.canvheight/2 :
+    if pelota.ycor()-10 == ventana.canvheight/2 or pelota.ycor() +10 == -ventana.canvheight/2 :
         pelota.dy *=-1
         #winsound.Beep(1000, 50)
 
@@ -98,7 +107,7 @@ while not gameOver:
         pelota.goto(0,0)
         score.jugador2 +=1
         score.clear()
-        score.write(f"jugardor 1: {score.jugador1}   jugador 2: {score.jugador2} ",
+        score.write(f"jugardor1: {score.jugador1}   jugador2: {score.jugador2} ",
                     align="center", font=("courier", 20, "bold"))
 
     #cuando no alcanza a rebotar en el jugador2
@@ -106,7 +115,7 @@ while not gameOver:
         pelota.goto(0,0)
         score.jugador1 += 1
         score.clear()
-        score.write(f"jugardor 1: {score.jugador1}   jugador 2: {score.jugador2} ",
+        score.write(f"jugardor1: {score.jugador1}   jugador2: {score.jugador2} ",
                     align="center", font=("courier", 20, "bold"))
     #rebote en el jugador1
     if pelota.xcor() == -anchoJuego + 30:
